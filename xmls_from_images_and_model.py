@@ -1,10 +1,11 @@
 import xml.etree.cElementTree as ET
 import tensorflow as tf
 import numpy as np
-from PIL import Image, ImageOps
+from PIL import Image
 import glob
 import cv2
 import os
+
 # Make an XML file for an image
 def generate_xml(box_array, num_detections, im_width, im_height, inferred_class, file_path):
     file_name = (file_path.split("\\")[1]).split(".")[0]
@@ -28,17 +29,19 @@ def generate_xml(box_array, num_detections, im_width, im_height, inferred_class,
             ET.SubElement(bndBox, 'xmax').text = str(round(box[3]))
             ET.SubElement(bndBox, 'ymax').text = str(round(box[2]))
 
-        arquivo = ET.ElementTree(annotation)
+        tree = ET.ElementTree(annotation)
 
         #If all three targets are not detected, place in separate folder for closer inspection
         if num_detections<3:
-            arquivo.write('./xmls/!three_box/' + file_name + '.xml')
+            tree.write('./xmls/!three_box/' + file_name + '.xml')
             os.replace(file_path, './images/!three_box_images/' + file_name + '.png')
+            print(file_name+'.xml generated with less than three boxes')
         else:
-            arquivo.write('./xmls/three_box/' + file_name + '.xml')
+            tree.write('./xmls/three_box/' + file_name + '.xml')
             os.replace(file_path, './images/three_box_images/' + file_name + '.png')
+            print(file_name+'.xml generated with all three boxes')
     except Exception as e:
-        print('Error to generate XML for image {}'.format(file_name))
+        print('Error to generate XML for image '+file_name)
         print(e)
 
 
@@ -57,9 +60,8 @@ detect_fn = tf.saved_model.load("saved_model")
 image_list = glob.glob('images/*.png')
 
 if len(image_list)==0:
-    print("Place png files in images folder. Change all instances of .png to preferred image file type if needed")
+    print("Place png files in images folder. Change all instances of .png in script to preferred image file type if needed")
     quit()
-print(image_list)
 
 for file_path in image_list:
     img = cv2.imread(file_path)
@@ -76,16 +78,13 @@ for file_path in image_list:
         temp = Image.open(file_path)
         width, height = temp.size
         temp.close()
-        
+
         for box in detections['detection_boxes']:
-            print(box)
             y1, x1, y2, x2 = box
             box[0] = round(y1*height)
             box[1] = round(x1*width)
             box[2] = round(y2*height)
             box[3] = round(x2*width)
-            print(box[0], box[1], box[2], box[3])
-
         generate_xml(detections['detection_boxes'], num_detections, width, height, "target", file_path)
     else:
         #If there are no targets detected at all in the file, place in separate folder

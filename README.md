@@ -33,5 +33,23 @@ Unfortunately, I couldn't get what I was using to convert the video to a gif to 
 
 However, I still had an issue. Even with the speed increase, I still had issues with the reinforcement learning aspect. Because I had to train the model on a real time game and couldn't use vectorized environments, training was relatively slow. Even after running it for a few nights, I was unable to achieve any significant progress. I decided to try something else. Overall, it was probably best that I didn't end up using a reinforcement learning agent for this, as it would have slowed down run time. 
 
-I decided to try the simplest approach. The basis for my approach was to subtract the coordinates for the center of my screen (960, 540) from the coordinates of the center of the target closest to the crosshair. After that I tested multiple scalars until the script wasn't under or over aiming anymore. For some reason though, the scalar needed to hit the target wait
+I decided to try the simplest approach. The basis for my approach was to subtract the coordinates for the center of my screen (960, 540) from the coordinates of the center of the target closest to the crosshair. After that I tested multiple scalars until the script wasn't under or over aiming anymore. For some reason though, the scalar needed to hit the target was not the exact same for each distance away from the crosshair. To try and accomodate this I tried to do this:
 
+```   
+if abs(relx) < 50:
+        scalarx = 3.35
+    elif abs(relx) < 100:
+        scalarx = 3.3
+    elif abs(relx) < 200:
+        scalarx = 3.22
+    elif abs(relx) < 400:
+        scalarx = 3.15
+    else:
+        scalarx = 3.00
+```
+
+After doing this, everything worked. 
+
+https://user-images.githubusercontent.com/64398319/182534633-55d006c6-e0b9-42f5-be83-bedec25ff857.mp4
+
+# Conclusion

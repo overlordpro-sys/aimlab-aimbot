@@ -20,7 +20,7 @@ Now that I had basic I/O working, the reinforcement learning section was next. T
 
 After finishing everything, it was finished! But not really. 
 
-## The Solution
+## What Worked
 
 There were a couple significant issues. The worst was the object detection model. Even after training, the model was extremely unaccurate at times. This was most likely due to how the targets' backgrounds changed during training due to their different positions in each image. Furthermore, the model was far too slow for what I was aiming for: a fast and accurate aimbot.  
 
@@ -53,3 +53,7 @@ After doing this, everything worked.
 https://user-images.githubusercontent.com/64398319/182534633-55d006c6-e0b9-42f5-be83-bedec25ff857.mp4
 
 # Conclusion
+
+At the beginning, I intended to entirely rely on machine learning for this project. However, over its course, I learned that sometimes simpler is better. Machine learning is not always the best for every situation. However, it was a really interesting experience seeing my object detection model come together. One thing I try though is using a neural network to replace the scalars I used for moving the mouse. Overall, this project was a very fun project and I'm very happy with how it turned out.
+
+I am going to upload both what didn't work and what did work as reference for myself in the future. 

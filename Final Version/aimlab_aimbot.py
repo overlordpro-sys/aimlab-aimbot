@@ -9,7 +9,7 @@ from mss import mss
 stream = mss()
 monitor = {'top': 0, 'left': 0, 'width': 1920, 'height': 1080}
 
-
+# get screen coordinate of target closest to crosshair
 def coords():
     screen = np.array(stream.grab(monitor))
     gray = cv2.cvtColor(screen, cv2.COLOR_BGR2GRAY)
@@ -31,12 +31,12 @@ def coords():
     return min(duo, key=duo.get)
 
 
-# distance from middle of screen or crosshair
+# distance from middle of screen or crosshair to point
 def distance(point):
     dist = [(a - b) ** 2 for a, b in zip((960, 540), point)]
     return sqrt(sum(dist))
 
-
+# restart the game session to have fresh start
 def restart_session():
     win32api.keybd_event(0x75, 0, 0, 0)
     win32api.keybd_event(0x75, 0, win32con.KEYEVENTF_KEYUP, 0)
@@ -48,7 +48,10 @@ def restart_session():
 
 time.sleep(2)
 restart_session()
+print("Press 'q' to exit")
 while True:
+    if keyboard.is_pressed('q'):
+        break
     x, y = coords()
     if x == -1 or y == -1:
         continue

@@ -38,22 +38,36 @@ Now, I still had an issue. Even with the speed increase the reinforcement learni
 
 I decided to try something else. Overall, it was probably best that I did not end up using a reinforcement learning agent for this.  The same computer probably would not likely have fallen behind at runtime as well. 
 
-I decided to try the simplest approach. The idea was to subtract the coordinates for the center of my screen (960, 540) from the coordinates of the center of the target closest to the crosshair. After that I tested multiple scalars until the script wasn't under or over aiming anymore. For some reason though, the scalar needed to hit the target was not the exact same for each distance away from the crosshair. To try and accomodate this I tried to do this:
+I decided to try the simplest approach. The idea was to subtract the coordinates for the center of my screen (960, 540) from the coordinates of the center of the target closest to the crosshair. This would give me the coordinate of the target relative to the middle of the screen. For example, if the closest target was a coordinate to the left, my relative coordinate would be in terms of (-x, +/- y). However, Aimlab allows the user to input their mouse sensitivity for another game in order to give the same experience as aiming in the game itself. In my Aimlab settings, I had my sensitivity set to a custom value, 0.32 for the game Valorant. Due to this, the script was not moving the mouse far enough to hit the target. To accomodate this, I tested multiplying the relative values by a scalar. 
+
+When doing this, I found that the script was undershooting closer targets and overshooting further targets. To accomodate this I increased the multiplier for lower values and increased the multipler for higher values:
 
 ```   
 if abs(relx) < 50:
         scalarx = 3.35
-    elif abs(relx) < 100:
+elif abs(relx) < 100:
         scalarx = 3.3
-    elif abs(relx) < 200:
+elif abs(relx) < 200:
         scalarx = 3.22
-    elif abs(relx) < 400:
+elif abs(relx) < 400:
         scalarx = 3.15
-    else:
+else:
         scalarx = 3.00
+        
+if abs(rely) < 50:
+        scalary = 3.35
+elif abs(rely) < 100:
+        scalary = 3.3
+elif abs(rely) < 200:
+        scalary = 3.22
+elif abs(relx) < 400:
+        scalary = 3.15
+else:
+        scalary = 2.90
 ```
+I did notice that multiplying my adjusted scalar values (~3) by my sensitivity (.32) was about 1, so I tried removing my multipliers and setting my in-game sensitivity to 1. This almost worked but the script still missed on targets that were further away. 
 
-After doing this, everything worked. 
+Using the multipliers above, everything worked. In this video, you can see how quickly and accurately the script was able to hit the targets. 
 
 https://user-images.githubusercontent.com/64398319/182534633-55d006c6-e0b9-42f5-be83-bedec25ff857.mp4
 
@@ -61,4 +75,4 @@ https://user-images.githubusercontent.com/64398319/182534633-55d006c6-e0b9-42f5-
 
 At the beginning, I intended to entirely rely on machine learning for this project. However, over its course, I learned that sometimes simpler is better. Machine learning is not always the best for every situation. However, it was a really interesting experience seeing my object detection model come together. One thing I may try in the future is using a neural network to replace the scalars I used for moving the mouse. Overall, this project was a very fun project and I'm very happy with how it turned out.
 
-I am going to upload both what didn't work and what did work as reference for myself in the future. 
+I have uploaded both what didn't work and what did work as reference for myself in the future. 

@@ -28,7 +28,6 @@ def coords():
     duo = {point: distance(point) for point in points}
     if len(duo) == 0:
         return [-1, -1]
-    print(min(duo, key=duo.get))
     return min(duo, key=duo.get)
 
 

@@ -6,6 +6,7 @@ import numpy as np
 import win32api
 import win32con
 from mss import mss
+import keyboard
 
 stream = mss()
 monitor = {
@@ -45,7 +46,10 @@ def gc_distance(point):
 
 
 time.sleep(2)
+print("Press 'q' to exit")
 while True:
+    if keyboard.is_pressed('q'):
+        break
     x, y = getCoord()
     if x == -1 or y == -1:
         continue

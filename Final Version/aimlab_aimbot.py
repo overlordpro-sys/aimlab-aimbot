@@ -5,6 +5,7 @@ import numpy as np
 import win32api
 import win32con
 from mss import mss
+import keyboard
 
 stream = mss()
 monitor = {'top': 0, 'left': 0, 'width': 1920, 'height': 1080}

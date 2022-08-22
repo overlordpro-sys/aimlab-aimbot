@@ -39,16 +39,8 @@ def distance(point):
 
 
 def restart_session():
-    win32api.keybd_event(0x1B, 0, 0, 0)
-    win32api.keybd_event(0x1B, 0, win32con.KEYEVENTF_KEYUP, 0)
-    time.sleep(.5)
-    win32api.mouse_event(win32con.MOUSEEVENTF_MOVE, 155 - 960, 450 - 540, 0, 0)
-    win32api.mouse_event(win32con.MOUSEEVENTF_LEFTDOWN, 155 - 960, 450 - 540)
-    win32api.mouse_event(win32con.MOUSEEVENTF_LEFTUP, 155 - 960, 450 - 540)
-    time.sleep(.5)
-    win32api.mouse_event(win32con.MOUSEEVENTF_MOVE, 870 - 155, 660 - 450, 0, 0)
-    win32api.mouse_event(win32con.MOUSEEVENTF_LEFTDOWN, 0, 0)
-    win32api.mouse_event(win32con.MOUSEEVENTF_LEFTUP, 0, 0)
+    win32api.keybd_event(0x75, 0, 0, 0)
+    win32api.keybd_event(0x75, 0, win32con.KEYEVENTF_KEYUP, 0)
     time.sleep(.5)
     win32api.mouse_event(win32con.MOUSEEVENTF_LEFTDOWN, 0, 0)
     win32api.mouse_event(win32con.MOUSEEVENTF_LEFTUP, 0, 0)

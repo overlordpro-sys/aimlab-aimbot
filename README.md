@@ -16,7 +16,7 @@ I used OBS Virtual Camera to get real time coordinates for each target. A script
 
 Feedback and clicking was much easier. Because of how reinforcement learning works, I needed some way to provide positive feedback to the script. In AimLab, a sound is played each time a target is hit. Thus, the program detects the associated amplitude changes in the sound stream in real-time. As for mouse control, while many methods seemed available only [win32api](https://www.delftstack.com/howto/python/python-win32api/) was viable.  This enabled the ML model to autonomously move the crosshair around in game.
 
-The reinforcement learning section was next now that I had basic I/O and the necessary mechanisms for a model to sense and interact with its environment. To achieve this, I used (Stable Baselines3)[https://github.com/DLR-RM/stable-baselines3] and a custom OpenAI Gym environment. Creating a custom environment was relatively simple due to the excellent SB3 documentation. 
+The reinforcement learning section was next now that I had basic I/O and the necessary mechanisms for a model to sense and interact with its environment. To achieve this, I used [Stable Baselines3](https://github.com/DLR-RM/stable-baselines3) and a custom OpenAI Gym environment. Creating a custom environment was relatively simple due to the excellent SB3 documentation. 
 
 After finishing everything, it was finished! But not really. 
 

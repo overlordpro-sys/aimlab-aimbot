@@ -26,9 +26,9 @@ There were a couple significant issues. The worst was the object detection model
 
 ![ezgif com-gif-maker (5)](https://user-images.githubusercontent.com/64398319/182521148-778dd34a-0d58-473d-9bcc-d8bb1050c2d4.gif)
 
-Then I remembered something I had seen about using grayscale images and a threshold for computer vision.  I could easily do this using (cv2)[https://pypi.org/project/opencv-python/]. 
+Then I remembered something I had seen about using grayscale images and a threshold for computer vision.  I could easily do this using [cv2](https://pypi.org/project/opencv-python/). 
 
-A read frame is converted into grayscale then thresholded. After that, I can use (cv2.findContours)[https://docs.opencv.org/4.x/d4/d73/tutorial_py_contours_begin.html] and cv2.moments to find the center of each target. I also changed to using (mss)[https://python-mss.readthedocs.io/examples.html] for frame capture.  This ran much faster than prior methods. After changing the wall colors to black, the targets to white, and adjusting the threshold, I was able to significantly accelerate the how fast targets could be detected. To better present results for visualization, the program uses cv2 draw a large green circle at the returned coordinates. 
+A read frame is converted into grayscale then thresholded. After that, I can use [cv2.findContours](https://docs.opencv.org/4.x/d4/d73/tutorial_py_contours_begin.html) and cv2.moments to find the center of each target. I also changed to using [mss](https://python-mss.readthedocs.io/examples.html) for frame capture.  This ran much faster than prior methods. After changing the wall colors to black, the targets to white, and adjusting the threshold, I was able to significantly accelerate the how fast targets could be detected. To better present results for visualization, the program uses cv2 draw a large green circle at the returned coordinates. 
 
 The program runs sufficiently fast that it is as smooth as the original stream.  Please excuse the stuttery gif animation, however; the video to gif converter used for this animation is limited to just 30 fps.
 

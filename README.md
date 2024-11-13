@@ -1,4 +1,4 @@
-# aimlab-aimbot
+# aimlab-aim-script
 AimLab aim training software is designed to improve a player's reflexes and accuracy in games like [Fortnite](https://www.epicgames.com/fortnite/en-US/home).  I thought it would be interesting to have a robot take the place of a human being trained - just because.
 
 ## The Failures
